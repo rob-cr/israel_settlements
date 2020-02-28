@@ -10,12 +10,15 @@ infile <- "..Israel_cities_data_geocoded"
 data <- read.csv(paste0('./', infile, '.csv'))
 # get the address list, and append "Ireland" to the end to increase accuracy 
 # (change or remove this if your address already include a country etc.)
-addresses = data$Address
-addresses = paste0(addresses, ", Israel")
+lat = data$lat
+ln = data$long
+
+addresses = paste0(as.numeric(ln,lat))
+
 #define a function that will process googles server responses for us.
 getGeoDetails <- function(address){   
   #use the gecode function to query google servers
-  geo_reply = geocode(address, output='all', messaging=TRUE, override_limit=TRUE)
+  geo_reply = revgeocode(address, output='all', messaging=TRUE, override_limit=TRUE)
   #now extract the bits that we need from the returned list
   answer <- data.frame(lat=NA, long=NA, accuracy=NA, formatted_address=NA, address_type=NA, status=NA)
   answer$status <- geo_reply$status
@@ -49,7 +52,7 @@ geocoded <- data.frame()
 # find out where to start in the address list (if the script was interrupted before):
 startindex <- 1
 #if a temp file exists - load it up and count the rows!
-tempfilename <- paste0(infile, '_temp_geocoded.rds')
+tempfilename <- paste0(infile, '_temp_revgeocoded.rds')
 if (file.exists(tempfilename)){
   print("Found temp file - resuming from index:")
   geocoded <- readRDS(tempfilename)
@@ -76,6 +79,6 @@ data$accuracy <- geocoded$accuracy
 #data$postal_code <- geocoded$postal_code
 
 #finally write it all to the output files
-saveRDS(data, paste0("..", infile ,"_geocoded.rds"))
-write.table(data, file=paste0("..", infile ,"_geocoded.csv"), sep=",", row.names=FALSE)
+saveRDS(data, paste0("..", infile ,"_revgeocoded.rds"))
+write.table(data, file=paste0("..", infile ,"_revgeocoded.csv"), sep=",", row.names=FALSE)
 

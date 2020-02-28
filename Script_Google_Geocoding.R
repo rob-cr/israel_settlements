@@ -2,16 +2,17 @@
 # Shane Lynn 10/10/2013
 #load up the ggmap library
 library(ggmap)
-#API key (nur einmal pro Sitzung hinzufügen)
+#API key (nur einmal pro Sitzung hinzuf?gen)
 register_google("AIzaSyBzfDu3G-ZDKAFflao-FVoXbFeGYJtOaMg")
 # get the input data
-setwd("D:/robin/Documents/Projekte/Israel_project/data/zip codes/phone_codes")
-infile <- "Israel_cities_data"
+setwd("D:/robin/Documents/Projekte/Israel_project/data/zip codes/phone_codes/R Geocoding")
+#infile <- "Israel_cities_data"
+infile <- "Palestine_cities_data"
 data <- read.csv(paste0('./', infile, '.csv'))
 # get the address list, and append "Ireland" to the end to increase accuracy 
 # (change or remove this if your address already include a country etc.)
-addresses = data$Address
-addresses = paste0(addresses, ", Israel")
+addresses = data$address
+addresses = paste0(addresses, ", Palestine")
 #define a function that will process googles server responses for us.
 getGeoDetails <- function(address){   
   #use the gecode function to query google servers
