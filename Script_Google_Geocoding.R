@@ -7,12 +7,13 @@ register_google("AIzaSyBzfDu3G-ZDKAFflao-FVoXbFeGYJtOaMg")
 # get the input data
 setwd("D:/robin/Documents/Projekte/Israel_project/data/zip codes/phone_codes/R Geocoding")
 #infile <- "Israel_cities_data"
-infile <- "Palestine_cities_data"
+infile <- "Israel_settlements"
+#infile <- "Palestine_cities_data"
 data <- read.csv(paste0('./', infile, '.csv'))
 # get the address list, and append "Ireland" to the end to increase accuracy 
 # (change or remove this if your address already include a country etc.)
-addresses = data$address
-addresses = paste0(addresses, ", Palestine")
+addresses = as.character(data$address)
+addresses = paste0(addresses, ", Middle East")
 #define a function that will process googles server responses for us.
 getGeoDetails <- function(address){   
   #use the gecode function to query google servers
