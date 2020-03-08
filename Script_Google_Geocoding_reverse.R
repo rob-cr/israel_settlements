@@ -2,9 +2,6 @@
 # Shane Lynn 10/10/2013
 #load up the ggmap library
 library(ggmap)
-
-
-2+4
 #API key (nur einmal pro Sitzung hinzuf?gen)
 register_google("AIzaSyBzfDu3G-ZDKAFflao-FVoXbFeGYJtOaMg")
 # get the input data
