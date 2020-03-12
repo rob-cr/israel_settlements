@@ -6,8 +6,10 @@ library(ggmap)
 register_google("AIzaSyBzfDu3G-ZDKAFflao-FVoXbFeGYJtOaMg")
 # get the input data
 setwd("D:/robin/Documents/Projekte/Israel_project/data/zip codes/phone_codes/R Geocoding")
+###if created by Excel, files must be stored in "CSV-Trennzeichen-getrennt", not UTF-8
 #infile <- "Israel_cities_data"
-infile <- "Israel_settlements"
+#infile <- "Israel_settlements"
+infile <-  "israel_settlements_peacenow"
 #infile <- "Palestine_cities_data"
 data <- read.csv(paste0('./', infile, '.csv'))
 # get the address list, and append "Ireland" to the end to increase accuracy 
