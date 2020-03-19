@@ -2,6 +2,7 @@
 # Shane Lynn 10/10/2013
 #load up the ggmap library
 library(ggmap)
+library(readxl)
 #API key (nur einmal pro Sitzung hinzuf?gen)
 register_google("AIzaSyBzfDu3G-ZDKAFflao-FVoXbFeGYJtOaMg")
 # get the input data
@@ -9,9 +10,12 @@ setwd("D:/robin/Documents/Projekte/Israel_project/data/zip codes/phone_codes/R G
 ###if created by Excel, files must be stored in "CSV-Trennzeichen-getrennt", not UTF-8
 #infile <- "Israel_cities_data"
 #infile <- "Israel_settlements"
-infile <-  "israel_settlements_peacenow"
+#infile <-  "israel_settlements_peacenow"
+infile <- "palestine_cities_census_2017" #source: http://www.pcbs.gov.ps/census2017/
+  data <- read_excel(paste0('./', infile, '.xlsx'))
 #infile <- "Palestine_cities_data"
-data <- read.csv(paste0('./', infile, '.csv'))
+#data <- read.csv(paste0('./', infile, '.csv'))
+
 # get the address list, and append "Ireland" to the end to increase accuracy 
 # (change or remove this if your address already include a country etc.)
 addresses = as.character(data$address)
