@@ -1,26 +1,26 @@
-# Geocoding script for large list of addresses. 
-# Shane Lynn 10/10/2013
-#load up the ggmap library
+# Geocoding script for large list of addresses. (modified)
+# original script by Shane Lynn 10/10/2013, available at https://www.shanelynn.ie/massive-geocoding-with-r-and-google-maps/
+
 library(ggmap)
 library(readxl)
-#API key (nur einmal pro Sitzung hinzuf?gen)
+#API key (enter personal Google API key here)
 register_google("AIzaSyBzfDu3G-ZDKAFflao-FVoXbFeGYJtOaMg")
-# get the input data
-setwd("D:/robin/Documents/Projekte/Israel_project/data/zip codes/phone_codes/R Geocoding")
-###if created by Excel, files must be stored in "CSV-Trennzeichen-getrennt", not UTF-8
+# set working directory
+setwd("...")
+###if created by Excel, files CSV files must be stored in "CSV-Trennzeichen-getrennt", not UTF-8 encoding
 #infile <- "Israel_cities_data"
 #infile <- "Israel_settlements"
 #infile <-  "israel_settlements_peacenow"
 infile <- "palestine_cities_census_2017" #source: http://www.pcbs.gov.ps/census2017/
   data <- read_excel(paste0('./', infile, '.xlsx'))
-#infile <- "Palestine_cities_data"
+#for csv files:
 #data <- read.csv(paste0('./', infile, '.csv'))
 
-# get the address list, and append "Ireland" to the end to increase accuracy 
-# (change or remove this if your address already include a country etc.)
+# get the address list, and append "Middle East" to increase geocoding accuracy 
 addresses = as.character(data$address)
 addresses = paste0(addresses, ", Middle East")
-#define a function that will process googles server responses for us.
+
+#define a function that will process googles server responses
 getGeoDetails <- function(address){   
   #use the gecode function to query google servers
   geo_reply = geocode(address, output='all', messaging=TRUE, override_limit=TRUE)
@@ -43,8 +43,6 @@ getGeoDetails <- function(address){
   #else, extract what we need from the Google server reply into a dataframe:
   answer$lat <- geo_reply$results[[1]]$geometry$location$lat
   answer$long <- geo_reply$results[[1]]$geometry$location$lng
-  #answer$short_name <- geo_reply$results[[1]]$address_components[[6]]$short_name
-  #answer$test <- geo_reply$results[[1]]$geometry$location$lng
   if (length(geo_reply$results[[1]]$types) > 0){
     answer$accuracy <- geo_reply$results[[1]]$types[[1]]
   }
@@ -80,7 +78,6 @@ for (ii in seq(startindex, length(addresses))){
 data$lat <- geocoded$lat
 data$long <- geocoded$long
 data$accuracy <- geocoded$accuracy
-#data$test <- geocoded$test
 #data$postal_code <- geocoded$postal_code
 
 #finally write it all to the output files

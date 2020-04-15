@@ -1,0 +1,68 @@
+<!---modified from https://github.com/Microsoft/BingMapsV8CodeSamples/blob/master/Samples/Spatial%20Data%20Services%20-%20GeoData%20API/Multiple%20GeoData%20Entity%20Type%20Boundaries.html--->
+<!DOCTYPE html>
+    <html>
+    <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script type='text/javascript'>
+    var map;
+
+    function GetMap() {
+        map = new Microsoft.Maps.Map('#myMap', {
+            zoom: 1
+        });
+
+        //Load the Spatial Data Services module.
+        Microsoft.Maps.loadModule('Microsoft.Maps.SpatialDataService', function () {
+            //Create an array of first boundary type to be tested
+            var states = ['Azzun Atma', 'Nehusha','Amman', 'Nokdim', 'Bet Schemesh', 'Beerscheba', 'Kirjat Gat','Kirjat Arba','Hebron El Khalil','Asfar','Tarqumiyah', 'Halhul','Tuqu', 'Tekoa','Maale Amos', 'Beit Fajjar', 'Oranit', 'Haifa', 'Dimona', 'Bani Naim','Jerusalem','Jericho','Hebron, Israel', 'Al-Arish', 'Gaza', 'Darom', 'Nazaret', 'Hagay','Dschenin', 'Efrata'];
+
+            //Create geoData request options to retrieve state boundaries.
+            var stateRequestOptions = {
+                entityType: 'Postcode1', //PopulatedPlace, Postcode2 to test also
+                getAllPolygons: false,
+            };
+
+            //Use the GeoData API manager to get the boundary.
+            Microsoft.Maps.SpatialDataService.GeoDataAPIManager.getBoundary(states, stateRequestOptions, map, function (data) {
+                if (data.results && data.results.length > 0) {
+                    map.entities.push(data.results[0].Polygons);
+                }
+            });
+            map.setView({
+                  //mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+                  center: new Microsoft.Maps.Location(31.80438, 34.65531),
+                  zoom: 7
+              });
+
+          //Testing purpose:
+            //Create an array of second boundary type to test. Comment out next line to see which boundary type is displayed
+         //var countries = ['Jerusalem', 'Bonn', 'Hebron', 'Germany'];
+
+            //Create geoData request options to retrieve country boundaries.
+            var countryRequestOptions = {
+                entityType: 'AdminDivision1',
+                getAllPolygons: false,
+            };
+
+            //Use the GeoData API manager to retrieve the second boundary.
+            Microsoft.Maps.SpatialDataService.GeoDataAPIManager.getBoundary(countries, countryRequestOptions, map, function (data) {
+                if (data.results && data.results.length > 0) {
+                    map.entities.push(data.results[0].Polygons);
+                }
+            });
+        });
+    }
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=Apkr-lN5rwcrFJHHtkpBJbVMRaLqkMU_XTlr0HFfo0RVH4TQ7sH7EJsfDCRP3CJ8' async defer></script>
+</head>
+<body>
+    <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
+
+    <fieldset style="width:800px;margin-top:10px;">
+        <legend>Sample boundaries of postal code areas (Postcode1)</legend>
+        Data from Bing Maps Geodata API, modified from </br><i>https://github.com/Microsoft/BingMapsV8CodeSamples/blob/master/Samples/Spatial%20Data%20Services%20-%20GeoData%20API/Multiple%20GeoData%20Entity%20Type%20Boundaries.html</i>
+      </br></br>Requested sample locations: 'Azzun Atma', 'Nehusha','Amman', 'Nokdim', 'Bet Schemesh', 'Beerscheba', 'Kirjat Gat','Kirjat Arba','Hebron El Khalil','Asfar','Tarqumiyah', 'Halhul','Tuqu', 'Tekoa','Maale Amos', 'Beit Fajjar', 'Oranit', 'Haifa', 'Dimona', 'Bani Naim','Jerusalem','Jericho','Hebron, Israel', 'Al-Arish', 'Gaza', 'Darom', 'Nazaret', 'Hagay','Dschenin', 'Efrata'
+    </fieldset>
+</body>
+</html>
