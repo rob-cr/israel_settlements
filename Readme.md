@@ -1,7 +1,10 @@
-## Data and scripts for detecting settlements in the Westbank using remote sensing data
+## Israeli Settlement Expansion in Palestine
+#### A spatiotemporal assessment based on Earth Observation
+---
+##### Data and scripts
 
-This repository serves as Appendix which holds data and scripts to document the working steps applied in the belonging study.
-Sources are cited in the paper and in the processing scripts where necessary.
+>This repository serves as appendix which holds data and scripts to document the working steps applied in the belonging study.
+Sources are cited in the paper and in the processing scripts where necessary.</br>
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)
 
-
->licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)
+*The long-lasting and complex conflict in the Middle East is highly affecting societies on both opposing parties. Israeli settlement expansion has repeatedly fueled tensions between Israel and the Palestine people. It remains one of the crucial tipping points for future treaties or possible one- respectively two-state solutions. Reliable information and neutral investigations are crucial for conflict-solving efforts. As the conflict is highly ideologically driven, uncertainties in data availability and reliability arise particularly with regard to sensible spatial data, not exclusively caused by affected parties but also third ones that refrain from offering information to prevent interference in a sensitive conflict. In this study remote sensing data (derived from the Global Human Settlement Layer) was used to face this challenge as its implementation enables highly objective insights in spatial processes and is applicable regardless of spatial restrictions. In combination with additional freely available data we set up an approach to classify the national affiliation of settlements in the highly disputed Westbank for four epochs from 1975 to 2015. We detected distinct patterns of settlement development and Israeli settlement expansion in particular but also revealed a profound shortage of information that is affecting the results and clearly decreasing the accuracy for inner differentiation of settlements. The complex and small-scaled spatial manifestations of the conflict require an appropriate information base to be concisely detected. Improving the database is seen as the main factor in order to increase the accuracy of the results.*
